@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+/**
+ * Driver/game controller.
+ */
+public class Game {
+
+    private Deck deck;
+    private Hand player1;
+    private Hand player2;
+
+    public Game() {
+        deck = new Deck();
+        player1 = new Hand(5);
+        player2 = new Hand(5);
+    }
+
+    public void playAGame() {
+        deck.shuffle();
+
+        // Deal 5 cards each
+        for (int i = 0; i < 5; i++) {
+            player1.addCard(deck.dealCard());
+            player2.addCard(deck.dealCard());
+        }
+
+        // Polymorphism: treat different subclasses as GroupOfCards
+        GroupOfCards[] groups = { deck, player1, player2 };
+        for (GroupOfCards g : groups) {
+            g.display(); // calls Deck.display or Hand.display depending on object type
+        }
+
+        Card c1 = player1.playACard();
+        Card c2 = player2.playACard();
+
+        System.out.println("\nPlayer 1 plays: " + c1);
+        System.out.println("Player 2 plays: " + c2);
+
+        if (c1.getNum() > c2.getNum()) {
+            System.out.println("Player 1 wins the round!");
+        } else if (c2.getNum() > c1.getNum()) {
+            System.out.println("Player 2 wins the round!");
+        } else {
+            System.out.println("Tie!");
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner stdIn = new Scanner(System.in);
+        String again;
+
+        do {
+            Game game = new Game();
+            game.playAGame();
+
+            System.out.print("\nWould you like to play again (y/n)? ");
+            again = stdIn.nextLine();
+        } while (again.equalsIgnoreCase("y"));
+
+        stdIn.close();
+    }
+}
