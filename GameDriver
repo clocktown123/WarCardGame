@@ -1,0 +1,19 @@
+import java.util.Scanner;
+
+public class GameDriver {
+
+    public static void main(String[] args) {
+        Scanner stdIn = new Scanner(System.in);
+        String again;
+        Game game;
+
+        do{
+            game = new Game();
+            game.playAGame();
+            System.out.print("Would you like to play again (y/n)?");
+            again = stdIn.nextLine();
+        } while(again.equalsIgnoreCase("y"));
+
+    }
+
+}
