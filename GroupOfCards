@@ -20,7 +20,20 @@ public class GroupOfCards {
         currentSize++;
     }
 
-    /** Polymorphism target: subclasses can override display() */
+
+
+    public void addCardBottom(Card card) {
+        if (currentSize >= cards.length) {
+            throw new IllegalStateException("GroupOfCards is full.");
+        }
+        for (int i = currentSize; i > 0; i--){
+            cards[i] = cards[i - 1];
+        }
+        cards[0] = card;
+        currentSize++;
+    }
+
+    // Polymorphism target: subclasses should override display()
     public void display() {
         for (int i = 0; i < currentSize; i++) {
             System.out.print(cards[i]);
