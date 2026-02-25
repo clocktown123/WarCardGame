@@ -1,0 +1,38 @@
+import java.util.Random;
+
+public class Deck extends GroupOfCards {
+
+    public static final int TOTAL_CARDS = 52;
+    private final Random rand = new Random();
+
+    public Deck() {
+        super(TOTAL_CARDS); // IMPORTANT: use superclass storage
+
+        for (int i = 0; i < TOTAL_CARDS; i++) {
+            addCard(new Card(2 + (i % 13), i / 13));
+        }
+    }
+
+    public void shuffle() {
+        for (int i = currentSize - 1; i > 0; i--) {
+            int j = rand.nextInt(i + 1);
+            Card temp = cards[i];
+            cards[i] = cards[j];
+            cards[j] = temp;
+        }
+    }
+
+    public Card dealCard() {
+        if (currentSize == 0) return null;
+        Card top = cards[currentSize - 1];
+        cards[currentSize - 1] = null;
+        currentSize--;
+        return top;
+    }
+
+    @Override
+    public void display() {
+        System.out.print("Deck (" + currentSize + "): ");
+        super.display();
+    }
+}
