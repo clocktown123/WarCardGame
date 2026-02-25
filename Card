@@ -1,0 +1,34 @@
+
+public class Card {
+    private int num;
+    private int suit;
+
+    public Card(int num, int suit) {
+        this.num = num;
+        this.suit = suit;
+    }
+
+    public int getNum() { return num; }
+    public int getSuit() { return suit; }
+
+    @Override
+    public String toString() {
+        String n = switch (num) {
+            case 11 -> "J";
+            case 12 -> "Q";
+            case 13 -> "K";
+            case 14 -> "A";
+            default -> String.valueOf(num);
+        };
+
+        String s = switch (suit) {
+            case 0 -> "Clubs";
+            case 1 -> "Diamonds";
+            case 2 -> "Hearts";
+            case 3 -> "Spades";
+            default -> "Unknown";
+        };
+
+        return n + " of " + s;
+    }
+}
