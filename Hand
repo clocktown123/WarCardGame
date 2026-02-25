@@ -1,0 +1,21 @@
+
+public class Hand extends GroupOfCards {
+
+    public Hand(int capacity) {
+        super(capacity);
+    }
+
+    public Card playACard() {
+        if (currentSize == 0) return null;
+        Card c = cards[currentSize - 1];
+        cards[currentSize - 1] = null;
+        currentSize--;
+        return c;
+    }
+
+    @Override
+    public void display() {
+        System.out.print("Hand (" + currentSize + "): ");
+        super.display();
+    }
+}
